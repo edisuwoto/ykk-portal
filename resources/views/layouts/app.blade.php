@@ -12,25 +12,95 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        @livewireStyles
+        @stack('styles')
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+    <body x-data="{ sidebar : false }" class="font-sans antialiased bg-gray-300">
+        <div class="fixed w-full top-0 z-20">
             @include('layouts.navigation')
+        </div>
 
+        <div x-show="sidebar"
+            style="display: none;">
+            <div class="fixed h-full w-full md:w-64 top-0 left-0 mt-12 bg-gray-100 md:border-r-2 border-blue-500 overflow-y-hidden">
+                <div class="m-1">
+                    <div class="bg-gradient-to-b from-gray-100 to-gray-300 border border-gray-300 shadow">
+                        <div class="p-2 text-sm">
+                            {{ __('messages.welcome') }}, <span class="font-bold">{{ auth()->user()->name }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div x-bind:class="{ 'md:ml-64' : sidebar }" class="mt-12 mb-6">
             <!-- Page Heading -->
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
+            <header class="bg-gradient-to-b from-gray-100 to-gray-300 border border-gray-300 shadow">
+                <div class="max-w-7xl mx-auto py-3 px-2 sm:px-6 lg:px-8">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            {{ $header }}
+                        </div>
+                        <div>
+
+                        </div>
+                    </div>
                 </div>
             </header>
 
             <!-- Page Content -->
-            <main>
+            <main class="container mx-auto">
                 {{ $slot }}
             </main>
         </div>
+
+        <div class="fixed w-full bottom-0 z-20">
+            <footer x-bind:class="{ 'md:ml-64' : sidebar }" x-data="clockConfig()" x-init="startClock">
+                <div class="m-1 px-4 py-1 bg-gray-100 border border-gray-400 shadow-lg">
+                    <div class="grid grid-cols-2">
+                        <div>
+                            <div class="flex items-center justify-start text-sm">
+                                <span class="font-bold">YKK ZIPPER INDONESIA</span>&copy;<span>2021</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-end text-sm">
+                                <span x-text="clock"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+        @livewireScripts
+        @stack('scripts')
+        <script>
+            function clockConfig() {
+                return {
+                    serverTime: new Date({{ time()*1000 }} ),
+                    clock : '',
+                    startClock: function(){
+                        const self = this;
+
+                        function updateClock() {
+                            var days = [''];
+                            var nowMS = self.serverTime.getTime();
+                            nowMS += 1000;
+                            var clock = new Date(self.serverTime.setTime(nowMS));
+                            self.clock = clock.getDate()+" "+clock.toLocaleString('default', {month: 'long'})+" "+clock.getFullYear()+" "+(clock.getHours() < 10 ? '0' : '')+clock.getHours()+":"+(clock.getMinutes() < 10 ? '0' : '')+clock.getMinutes()+":"+(clock.getSeconds() < 10 ? '0' : '')+clock.getSeconds();
+                        }
+
+                        setInterval(() => {
+                            updateClock();
+                        }, 1000);
+                    },
+                }
+            }
+        </script>
     </body>
 </html>
