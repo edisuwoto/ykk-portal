@@ -14,6 +14,8 @@ class Role extends Model
         'description',
     ];
 
+    public $timestamps = false;
+
     public function permissions()
     {
         return $this->belongsToMany(Permission::class)
