@@ -39,7 +39,7 @@
                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" class="inline-flex rounded-md">
                         <button class="group pr-4 inline-flex items-center space-x-2 border-2 border-transparent rounded-full hover:border-gray-200 focus:outline-none focus:border-gray-300 focus:shadow-inner transition duration-150 ease-in-out">
                             <img class="h-8 w-8 rounded-full object-cover" src="{{ auth()->user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" onerror="this.onerror=null; this.src='{{asset('storage/img/app/user.png')}}'" />
-                            <span class="text-white">{{ __('button.log_out') }}</span>
+                            <span class="text-white text-sm">{{ __('button.log_out') }}</span>
                         </button>
                     </a>
                 </form>
