@@ -38,7 +38,8 @@
                             </div>
                         </div>
                     </div>
-                    <hr class="border border-gray-400">
+                    <hr class="border border-gray-400 mb-1">
+                    @livewire('layouts.sidebar-menu')
                 </div>
             </div>
 
