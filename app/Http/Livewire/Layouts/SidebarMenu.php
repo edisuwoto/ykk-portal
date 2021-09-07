@@ -9,6 +9,10 @@ use App\Models\Menu;
 
 class SidebarMenu extends Component
 {
+    protected $listeners = [
+        'refresh-sidebar-menu'    => '$refresh',
+    ];
+
     protected function getActiveMenu()
     {
         $menu = Menu::where(['active' => 1, 'parent_id' => 0])->orderBy('sort', 'asc')->get();
