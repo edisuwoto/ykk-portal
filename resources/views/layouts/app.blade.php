@@ -31,10 +31,14 @@
                     <div class="m-1">
                         <div class="bg-gradient-to-b from-gray-100 to-gray-300 border border-gray-300 shadow">
                             <div class="p-2 text-sm">
-                                {{ __('messages.welcome') }}, <span class="font-bold">{{ auth()->user()->name }}</span>
+                                <div>
+                                    {{ __('messages.welcome') }},
+                                </div>
+                                <div class="font-bold">{{ auth()->user()->name }}</div>
                             </div>
                         </div>
                     </div>
+                    <hr class="border border-gray-400">
                 </div>
             </div>
 
@@ -64,7 +68,7 @@
 
             <div class="fixed w-full bottom-0 z-20">
                 <footer x-bind:class="{ 'md:ml-64' : sidebar }" x-data="clockConfig()" x-init="startClock">
-                    <div class="m-1 px-4 py-1 bg-gray-100 border border-gray-400 shadow-lg">
+                    <div class="m-1 px-1 md:px-4 py-1 bg-gray-100 border border-gray-400 shadow-lg">
                         <div class="grid grid-cols-2">
                             <div>
                                 <div class="flex items-center justify-start text-sm">

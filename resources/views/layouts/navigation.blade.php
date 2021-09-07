@@ -15,16 +15,35 @@
             </div>
         </div>
         <!-- Logout -->
-        <div class="flex justify-end items-center">
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" class="inline-flex rounded-md">
-                    <button class="group pr-4 inline-flex items-center space-x-2 border-2 border-transparent rounded-full hover:border-gray-200 focus:outline-none focus:border-gray-300 focus:shadow-inner transition duration-150 ease-in-out">
-                        <img class="h-8 w-8 rounded-full object-cover" src="{{ auth()->user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" onerror="this.onerror=null; this.src='{{asset('storage/img/app/user.png')}}'" />
-                        <span class="text-white">{{ __('Log Out') }}</span>
-                    </button>
-                </a>
-            </form>
+        <div class="flex justify-end items-center space-x-3">
+            <div>
+                <x-dropdown width="48">
+                    <x-slot name="trigger">
+                        <button class="flex items-center  border-2 border-transparent rounded-lg hover:border-gray-200 focus:outline-none focus:border-gray-300 focus:shadow-inner transition duration-150 ease-in-out">
+                            <i class="fas fa-language text-white text-3xl"></i>
+                        </button>
+                    </x-slot>
+
+                    <x-slot name="content">
+                        @foreach (array_filter(scandir(base_path().'/resources/lang/'), function($item){ return !(strpos($item, '.') !== false); }) as $lang)
+                            <x-dropdown-link :href="route('lang.change', ['lang' => $lang])">
+                                {{ strtoupper($lang) }}
+                            </x-dropdown-link>
+                        @endforeach
+                    </x-slot>
+                </x-dropdown>
+            </div>
+            <div>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" class="inline-flex rounded-md">
+                        <button class="group pr-4 inline-flex items-center space-x-2 border-2 border-transparent rounded-full hover:border-gray-200 focus:outline-none focus:border-gray-300 focus:shadow-inner transition duration-150 ease-in-out">
+                            <img class="h-8 w-8 rounded-full object-cover" src="{{ auth()->user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" onerror="this.onerror=null; this.src='{{asset('storage/img/app/user.png')}}'" />
+                            <span class="text-white">{{ __('button.log_out') }}</span>
+                        </button>
+                    </a>
+                </form>
+            </div>
         </div>
     </div>
 </nav>
