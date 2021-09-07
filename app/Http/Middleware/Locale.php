@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class Lang
+class Locale
 {
     /**
      * Handle an incoming request.
@@ -16,9 +16,7 @@ class Lang
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->user()) {
-            app()->setLocale($request->user()->lang ?? 'en');
-        }
+        app()->setLocale($request->user()->locale ?? (session('locale') ?? 'en'));
 
         return $next($request);
     }

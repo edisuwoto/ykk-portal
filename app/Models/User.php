@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\{
+    Auth\MustVerifyEmail,
+    Translation\HasLocalePreference,
+};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -21,7 +24,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'lang',
+        'locale',
         'profile_photo_path',
     ];
 
@@ -63,5 +66,15 @@ class User extends Authenticatable
         return $this->profile_photo_path
                     ? Storage::disk('public')->url($this->profile_photo_path)
                     : 'https://ui-avatars.com/api/?name='.urlencode($this->name).'&color=7F9CF5&background=EBF4FF';
+    }
+
+    /**
+     * Get the user's preferred locale.
+     *
+     * @return string
+     */
+    public function preferredLocale()
+    {
+        return $this->locale;
     }
 }
