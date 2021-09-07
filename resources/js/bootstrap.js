@@ -14,8 +14,16 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * Alpine JS
  */
 import Alpine from 'alpinejs';
+import persist from '@alpinejs/persist'
 window.Alpine = Alpine;
+Alpine.plugin(persist);
 Alpine.start();
+
+/**
+ * Omron FINS
+ */
+// import fins from 'omron-fins';
+// window.fins = fins;
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

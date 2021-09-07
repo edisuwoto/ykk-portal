@@ -19,3 +19,5 @@ mix
         require('autoprefixer'),
     ])
     .sass('resources/sass/app.scss', 'public/css');
+
+mix.browserSync('http://ykk-portal.test');
