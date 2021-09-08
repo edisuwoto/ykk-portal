@@ -7,11 +7,29 @@ use Livewire\Component;
 // Models
 use App\Models\User;
 
+// Traits
+use App\Http\Traits\Livewire\InteractsWithModal;
+
 class UserManagement extends Component
 {
+    use InteractsWithModal;
+
+    public function mount()
+    {
+        if (!auth()->user()->hasPermission('user_management-access')) {
+            session()->flash('failed', __('You are not authorize'));
+            return redirect()->route('dashboard');
+        }
+    }
+
     public function getUserProperty()
     {
         return User::get();
+    }
+
+    public function new()
+    {
+        $this->openModal('settings.user-management.modal.create-form', [], __('Create User'));
     }
 
     public function render()

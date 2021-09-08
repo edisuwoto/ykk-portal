@@ -10,8 +10,13 @@ use Rappasoft\LaravelLivewireTables\Views\Filter;
 // Models
 use App\Models\{User, Role};
 
+// Traits
+use App\Http\Traits\Livewire\InteractsWithModal;
+
 class IndexTable extends DataTableComponent
 {
+    use InteractsWithModal;
+
     public bool $perPageAll = true;
 
     public function filters(): array
@@ -30,7 +35,7 @@ class IndexTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make('name')
+            Column::make(__('Name'), 'name')
                 ->format(function($value, $column, $row){
                     return
                         '<div class="flex items-center">'.
@@ -41,9 +46,9 @@ class IndexTable extends DataTableComponent
                 ->asHtml()
                 ->sortable()
                 ->searchable(),
-            Column::make('email')
+            Column::make(__('Email'), 'email')
                 ->sortable(),
-            Column::make('Actions')
+            Column::make(__('Actions'))
                 ->format(function($value, $column, $row){
                     return view('livewire.settings.user-management.index-table.action', compact('row'));
                 }),
@@ -64,5 +69,16 @@ class IndexTable extends DataTableComponent
     {
         return User::query()
             ->when($this->getFilter('roles'), fn ($query, $roles) => $query->where(['role_id' => $roles]));
+    }
+
+    /**
+     * Open Edit Form modal
+     *
+     * @param User $id
+     *
+     */
+    public function edit($id)
+    {
+        $this->openModal('settings.user-management.modal.edit-form', ['user_id' => $id], __('Edit User'));
     }
 }
