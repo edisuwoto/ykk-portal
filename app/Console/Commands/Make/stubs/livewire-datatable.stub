@@ -1,0 +1,37 @@
+<?php
+
+namespace [namespace];
+
+use Illuminate\Database\Eloquent\Builder;
+use Rappasoft\LaravelLivewireTables\DataTableComponent;
+use Rappasoft\LaravelLivewireTables\Views\Column;
+use Rappasoft\LaravelLivewireTables\Views\Filter;
+
+// Models
+[use_model]
+
+class [class] extends DataTableComponent
+{
+    /**
+     * Define column.
+     *
+     * return $array
+     */
+    public function columns(): array
+    {
+        return [
+            Column::make('ID', 'id')
+                ->sortable(),
+        ];
+    }
+
+    /**
+     * Generate models query
+     *
+     * return Models $query
+     */
+    public function query(): Builder
+    {
+        [query_model]
+    }
+}
