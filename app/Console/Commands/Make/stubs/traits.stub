@@ -1,0 +1,16 @@
+<?php
+
+namespace DummyNamespace;
+
+trait DummyClass
+{
+    /**
+     * Define methods.
+     *
+     * return 0
+     */
+    public function functionName(){
+        // Code here
+        return 0;
+    }
+}
