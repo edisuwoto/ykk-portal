@@ -101,7 +101,7 @@ class CreateForm extends Component
         // Required
         foreach ($validation_fields as $field) {
             if ($form[$field] == '') {
-                $errors->add($field, __("The ".$field." field is required."));
+                $errors->add('form.'.$field, __("The ".(str_replace('_id', '', $field))." field is required."));
             }
         }
 
@@ -113,7 +113,7 @@ class CreateForm extends Component
                 $data = User::where($field, $form[$field])->first();
                 if ($data) {
                     if ($data->id != $form['id']) {
-                        $errors->add($field, __("The ".$field." is already exists."));
+                        $errors->add('form.'.$field, __("The ".(str_replace('_id', '', $field))." is already exists."));
                     }
                 }
             }
