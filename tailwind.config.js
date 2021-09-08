@@ -17,9 +17,15 @@ module.exports = {
 
     variants: {
         extend: {
+            backgroundColor: ['odd', 'even', 'active'],
+            borderWidth: ['first', 'last', 'odd', 'even'],
             opacity: ['disabled'],
         },
+        scrollbar: ['dark', 'rounded', 'hover'],
     },
 
-    plugins: [require('@tailwindcss/forms')],
+    plugins: [
+        require('tailwind-scrollbar'),
+        require('@tailwindcss/forms'),
+    ],
 };
