@@ -5,4 +5,7 @@ return [
     'log_in'            => 'Log In',
     'register'          => 'Register',
     'create_new'        => 'Create New',
+    'create'            => 'Create',
+    'update'            => 'Update',
+    'close'             => 'Close',
 ];
