@@ -22,7 +22,6 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased bg-gray-300">
-
         <div x-data="{ sidebar : $persist(false).as('sidebar-memory') }">
             <div class="fixed w-full top-0 z-20">
                 @include('layouts.navigation')
@@ -90,6 +89,8 @@
                 </footer>
             </div>
         </div>
+
+        @livewire('layouts.modal')
 
         @livewireScripts
         @stack('scripts')
