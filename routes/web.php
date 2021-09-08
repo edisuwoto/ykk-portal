@@ -1,6 +1,11 @@
 <?php
 
+namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Route;
+
+// Livewire Routes
+use App\Http\Livewire;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +26,7 @@ Route::name('lang')->prefix('lang')->group(function(){
     Route::get('change/{lang?}', function($lang){
         $list_in_lang_folder = scandir(base_path().'/resources/lang/');
 
-        if(!in_array($lang, array_filter($list_in_lang_folder, function($item){ return !(strpos($item, '.') !== false); }))){
+        if(!in_array($lang, array_filter($list_in_lang_folder, function($item){ return !(strpos($item, '.') !== false) && strlen($item) <= 2; }))){
             abort(404);
         }
 
@@ -37,8 +42,14 @@ Route::name('lang')->prefix('lang')->group(function(){
     })->name('.change');
 });
 
-Route::middleware(['auth'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::middleware(['auth'])->group(function(){
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::name('settings')->prefix('settings')->group(function(){
+        Route::get('user-management', Livewire\Settings\UserManagement::class)->name('.user-management');
+    });
+});
 
 require __DIR__.'/auth.php';
