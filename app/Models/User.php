@@ -26,6 +26,7 @@ class User extends Authenticatable
         'password',
         'locale',
         'profile_photo_path',
+        'role_id',
     ];
 
     /**
