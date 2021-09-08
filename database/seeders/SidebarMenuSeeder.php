@@ -121,8 +121,8 @@ class SidebarMenuSeeder extends Seeder
                     [
                         'title'         => 'User Management',
                         'parent_id'     => 11,
-                        'link'          => '#',
-                        'link_type'     => 'url',
+                        'link'          => 'settings.user-management',
+                        'link_type'     => 'route',
                         'icon'          => 'fas fa-user-cog',
                         'sort'          => 1,
                         'active'        => true,

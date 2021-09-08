@@ -25,7 +25,7 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        @foreach (array_filter(scandir(base_path().'/resources/lang/'), function($item){ return !(strpos($item, '.') !== false); }) as $lang)
+                        @foreach (array_filter(scandir(base_path().'/resources/lang/'), function($item){ return !(strpos($item, '.') !== false) && strlen($item) <= 2; }) as $lang)
                             <x-dropdown-link :href="route('lang.change', ['lang' => $lang])">
                                 {{ strtoupper($lang) }}
                             </x-dropdown-link>

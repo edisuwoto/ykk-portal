@@ -14,6 +14,9 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         @livewireStyles
         @stack('styles')
+        <style>
+            [x-cloak] { display: none !important; }
+        </style>
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
@@ -25,10 +28,9 @@
                 @include('layouts.navigation')
             </div>
 
-            <div x-show="sidebar"
-                style="display: none;">
-                <div class="fixed h-full w-full md:w-64 top-0 left-0 mt-12 bg-gray-100 md:border-r-2 border-blue-500 overflow-y-hidden">
-                    <div class="m-1">
+            <div x-show="sidebar" style="display: none;">
+                <div class="fixed h-full w-full md:w-64 pt-12 top-0 left-0 bottom-0">
+                    <div class="h-full w-full p-1 bg-gray-100 md:border-r-2 border-blue-500 flex flex-col overflow-y-hidden">
                         <div class="bg-gradient-to-b from-gray-100 to-gray-300 border border-gray-300 shadow">
                             <div class="p-2 text-sm">
                                 <div>
@@ -37,9 +39,11 @@
                                 <div class="font-bold">{{ auth()->user()->name }}</div>
                             </div>
                         </div>
+                        <hr class="border my-1 border-gray-300"/>
+                        <div class="h-full overflow-hidden overflow-y-scroll scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-400 hover:scrollbar-thumb-gray-600">
+                            @livewire('layouts.sidebar-menu')
+                        </div>
                     </div>
-                    <hr class="border border-gray-400 mb-1">
-                    @livewire('layouts.sidebar-menu')
                 </div>
             </div>
 
@@ -51,10 +55,10 @@
                         <div class="max-w-7xl mx-auto py-3 px-2 sm:px-6 lg:px-8">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    {{ $header ?? '' }}
+                                    {!! $header ?? '' !!}
                                 </div>
                                 <div>
-                                    {{ $headerTools ?? '' }}
+                                    {!! $headerTools ?? '' !!}
                                 </div>
                             </div>
                         </div>
@@ -68,7 +72,7 @@
             </div>
 
             <div class="fixed w-full bottom-0 z-20">
-                <footer x-bind:class="{ 'md:ml-64' : sidebar }" x-data="clockConfig()" x-init="startClock">
+                <footer x-bind:class="{ 'md:ml-64 hidden md:block' : sidebar }" x-data="clockConfig()" x-init="startClock">
                     <div class="m-1 px-1 md:px-4 py-1 bg-gray-100 border border-gray-400 shadow-lg">
                         <div class="grid grid-cols-2">
                             <div>
