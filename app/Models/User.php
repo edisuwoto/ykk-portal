@@ -56,6 +56,8 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    protected $with = ['permissions', 'role'];
+
     /**
      * Get the URL to the user's profile photo.
      *
@@ -77,4 +79,35 @@ class User extends Authenticatable
     {
         return $this->locale;
     }
+
+    /**
+     * Get the role that owns the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * The permissions that belong to the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class);
+    }
+
+    // Methods
+        /**
+         * User has permission
+         *
+         * @return bool
+         */
+        public function hasPermission($permission)
+        {
+            return $this->permissions->where(['name' => $permission])->first() || $this->role->name === 'developer' ? TRUE : FALSE;
+        }
 }
