@@ -25,5 +25,7 @@
     "Operators"             : "Operator",
     "Values"                : "Nilai",
     "Per Page"              : "Halaman",
-    "Actions"               : "Aksi"
+    "Connected"             : "Terhubung",
+    "Disconnected"          : "Terputus",
+    "Unknown"               : "Tidak dikenali"
 }

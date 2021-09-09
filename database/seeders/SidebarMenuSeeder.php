@@ -181,6 +181,21 @@ class SidebarMenuSeeder extends Seeder
                             )
                         );
                 }
+
+                $printers_labels = $menus->where('link', 'settings.plc-settings')->first();
+
+                if ($printers_labels) {
+                    $printers_labels
+                        ->permissions()
+                        ->sync($permissions
+                            ->filter(
+                                fn($permission) => in_array($permission->name, ['plc_settings-access'])
+                            )
+                            ->map(
+                                fn($permission) => $permission->id
+                            )
+                        );
+                }
             });
         } catch (\Exception $e) {
             dd($e);

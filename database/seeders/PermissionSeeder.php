@@ -53,6 +53,10 @@ class PermissionSeeder extends Seeder
                 'name'              => 'printers_and_labels-access',
                 'description'       => 'Access printers and labels',
             ],
+            [
+                'name'              => 'plc_settings-access',
+                'description'       => 'Access PLC settings',
+            ],
         ];
 
         try {
@@ -81,6 +85,7 @@ class PermissionSeeder extends Seeder
                             'user-delete',
                             'user_password-reset',
                             'printers_and_labels-access',
+                            'plc_settings-access',
                         ])
                     )->map(
                         fn($permission) => $permission->id
