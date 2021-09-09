@@ -83,7 +83,7 @@
                                 <h3 class="font-bold">{{ __('Box Printer') }}</h3>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
                                     <div>
-                                        <x-label :value="__('Printer').' 1'"/>
+                                        <x-label :value="__('Printer').' 2'"/>
                                         <x-select wire:model.defer="form.1.printer.driver" class="w-full text-sm">
                                             <option value="">--{{ __('Select Printer') }}--</option>
                                         </x-select>
