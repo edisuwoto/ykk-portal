@@ -8,6 +8,10 @@ class PageContent extends Component
 {
     public $readyToLoad = FALSE;
 
+    public $showFlashMessage = FALSE;
+
+    public $flashMessages = [];
+
     public $content;
 
     public function loadPage()
@@ -15,8 +19,33 @@ class PageContent extends Component
         $this->readyToLoad = TRUE;
     }
 
+    public function clearFlashMessage()
+    {
+        $this->showFlashMessage = FALSE;
+        $this->flashMessages    = [];
+    }
+
+    protected function generateMessages()
+    {
+        $sessions = ['success', 'warning', 'failed', 'info'];
+        $colors   = ['green', 'yellow', 'red', 'blue'];
+
+        foreach ($sessions as $key => $session) {
+            if (session()->has($session)) {
+                $this->showFlashMessage = TRUE;
+                $this->flashMessages[] = [
+                    'show'      => 'true',
+                    'messages'  => session($session),
+                    'color'     => $colors[$key],
+                ];
+            }
+        }
+    }
+
     public function render()
     {
+        $this->generateMessages();
+
         return view('livewire.layouts.page-content');
     }
 }
