@@ -145,7 +145,7 @@ class EditForm extends Component
         // Required
         foreach ($validation_fields as $field) {
             if ($form[$field] == '') {
-                $errors->add('form.'.$field, __("The ".(str_replace('_id', '', $field))." field is required."));
+                $errors->add('form.'.$field, __('validation.required', ['attribute' => (str_replace('_id', '', $field))]));
             }
         }
 
@@ -157,7 +157,7 @@ class EditForm extends Component
                 $data = User::where($field, $form[$field])->first();
                 if ($data) {
                     if ($data->id != $form['id']) {
-                        $errors->add('form.'.$field, __("The ".(str_replace('_id', '', $field))." is already exists."));
+                        $errors->add('form.'.$field, __('validation.unique', ['attribute' => (str_replace('_id', '', $field))]));
                     }
                 }
             }
