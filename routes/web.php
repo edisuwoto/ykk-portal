@@ -38,7 +38,7 @@ Route::name('lang')->prefix('lang')->group(function(){
 
         session()->flash('success', __('Change language success'));
 
-        return redirect()->route('dashboard');
+        return redirect()->back();
     })->name('.change');
 });
 
