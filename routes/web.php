@@ -49,6 +49,8 @@ Route::middleware(['auth'])->group(function(){
 
     Route::name('settings')->prefix('settings')->group(function(){
         Route::get('user-management', Livewire\Settings\UserManagement::class)->name('.user-management');
+        Route::get('printers-labels', Livewire\Settings\PrinterAndLabel::class)->name('.printers-labels');
+        Route::get('plc', Livewire\Settings\PlcSettings::class)->name('.plc-settings');
     });
 });
 
