@@ -76,8 +76,8 @@ class CreateForm extends Component
         try {
             DB::transaction(function(){
                 if (!$this->validation($this->form)->any()) {
-
-                    $this->form['password'] = \Illuminate\Support\Facades\Hash::make($this->form['email']);
+                    $form = $this->form;
+                    $form['password'] = \Illuminate\Support\Facades\Hash::make($form['password']);
                     $data = User::create($this->form);
 
                     $data->permissions()->sync($this->form['permissions']);
