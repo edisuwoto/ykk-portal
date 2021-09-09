@@ -1,7 +1,7 @@
 <div x-data="{ load : @entangle('readyToLoad').defer, flash : @entangle('showFlashMessage').defer }" wire:init="loadPage()">
     <div x-show="flash">
         @if ($showFlashMessage)
-            <div x-init="() => { setTimeout(function(){ $wire.clearFlashMessage(); }, 15000); }" class="fixed left-0 right-0 bottom-10 md:top-14 z-40">
+            <div x-init="() => { setTimeout(function(){ $wire.clearFlashMessage(); }, 15000); }" class="fixed left-0 right-0 bottom-0 md:top-14 z-40">
                 <div class="grid gap-2">
                     @foreach ($flashMessages as $key => $item)
                         <div x-data="{ show : false }"
