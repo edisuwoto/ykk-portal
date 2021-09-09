@@ -43,6 +43,10 @@ class EditForm extends Component
             session()->flash('failed', __('You are not authorize'));
             $this->close();
         }
+
+        if (!auth()->user()->hasPermission('user_permission-edit')){
+            $this->tabs = ['General'];
+        }
     }
 
     public function load()
@@ -83,6 +87,28 @@ class EditForm extends Component
             $this->form['permissions'] = array_diff($this->form['permissions'], [$id]);
         } else {
             array_push($this->form['permissions'], $id);
+        }
+    }
+
+    public function resetPassword()
+    {
+        $this->resetErrorBag();
+        $errors = $this->getErrorBag();
+        
+        try {
+            DB::transaction(function(){
+                if (in_array($this->form['id'], [null, ''])) {
+                    throw new \Exception(__('messages.not_found'));
+                }
+
+                $data = User::find($this->form['id']);
+                $form['password'] = \Illuminate\Support\Facades\Hash::make('password');
+                $data->update($form);
+
+                session()->flash('user_edit-form.success', __('passwords.reset').' '.__('passwords.current', ['password' => 'password']));
+            });
+        } catch (\Exception $e) {
+            $errors->add('user_edit-form.failed', $e->getMessage());
         }
     }
 

@@ -41,6 +41,14 @@ class PermissionSeeder extends Seeder
                 'name'              => 'user_permission-edit',
                 'description'       => 'Edit user\'s permissions',
             ],
+            [
+                'name'              => 'user_permission-edit',
+                'description'       => 'Edit user\'s permissions',
+            ],
+            [
+                'name'              => 'user_password-reset',
+                'description'       => 'Reset user password',
+            ],
         ];
 
         try {

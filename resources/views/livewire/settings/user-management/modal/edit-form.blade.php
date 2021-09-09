@@ -19,6 +19,20 @@
                 x-transition
                 class="grid grid-cols-1 md:grid-cols-2 gap-4"
                 style="display: none;">
+                @if (session('user_edit-form.success'))
+                    <div class="col-span-2">
+                        <span class="text-sm text-green-500">
+                            {{ session('user_edit-form.success') }}
+                        </span>
+                    </div>
+                @endif
+                @if (session('user_edit-form.failed'))
+                    <div class="col-span-2">
+                        <span class="text-sm text-red-500">
+                            {{ session('user_edit-form.failed') }}
+                        </span>
+                    </div>
+                @endif
                 <div class="col-span-2">
                     <div class="flex items-center justify-center">
                         <img
@@ -43,7 +57,7 @@
                 </div>
                 <div>
                     <x-label value="{{__('Role')}}"/>
-                    <x-select x-on:change="$wire.changeRoles()" wire:model.defer="form.role_id" class="w-full text-xs">
+                    <x-select x-on:change="$wire.changeRoles()" wire:model.defer="form.role_id" :disabled="!auth()->user()->hasPermission('user_role-edit')" class="w-full text-xs">
                         <option value="">-- {{ __('Select') }} --</option>
                         @foreach ($roles as $item)
                             <option value="{{ $item->id }}">{{ $item->description }}</option>
@@ -53,38 +67,47 @@
                         <div class="text-xs text-red-600">{{ $message }}</div>
                     @endforeach
                 </div>
+                @if (auth()->user()->hasPermission('user_password-reset'))
+                    <div class="col-span-2">
+                        <x-button wire:click="resetPassword()" wire:loading.attr="disabled" wire:target="resetPassword()" class="w-full">
+                            <i wire:loading wire:target="resetPassword()" class="fas fa-spin fa-circle-notch"></i> {{ __('Reset Password') }}
+                        </x-button>
+                    </div>
+                @endif
             </div>
-            <div x-show="section === 1"
-                x-transition
-                class="grid grid-cols-1 gap-4"
-                style="display: none">
-                <div>
-                    <x-label value="{{ __('Permissions') }}"/>
-                    <div class="max-h-60 mb-2 bg-white text-sm border border-gray-400 rounded-md overflow-y-scroll scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-600 scrollbar-track-gray-300">
-                        @forelse ($permissions as $permission)
-                            <div wire:click="setPermission({{ $permission->id }})" class="p-2 {{ in_array($permission->id, $form['permissions']) ? 'bg-blue-400 hover:bg-blue-300' : 'bg-white hover:bg-gray-200' }} flex items-center border-b last:border-0 border-gray-400 cursor-pointer transition ease-in-out">
-                                @if (in_array($permission->id, $form['permissions']))
-                                    <div class="flex-none mr-2">
-                                        <i class="fas fa-check-square text-white"></i>
-                                    </div>
-                                    <div class="flex-grow">
-                                        <span>{{ $permission->description }}</span>
-                                    </div>
-                                @else
-                                    <div class="flex-none mr-2">
-                                        <i class="far fa-square"></i>
-                                    </div>
-                                    <div class="flex-grow truncate">
-                                        <span>{{ $permission->description }}</span>
-                                    </div>
-                                @endif
-                            </div>
-                        @empty
-                            <div class="text-gray-300 text-sm text-center">{{ __('There is no permission.') }}</div>
-                        @endforelse
+            @if(auth()->user()->hasPermission('user_permission-edit'))
+                <div x-show="section === 1"
+                    x-transition
+                    class="grid grid-cols-1 gap-4"
+                    style="display: none">
+                    <div>
+                        <x-label value="{{ __('Permissions') }}"/>
+                        <div class="max-h-60 mb-2 bg-white text-sm border border-gray-400 rounded-md overflow-y-scroll scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-600 scrollbar-track-gray-300">
+                            @forelse ($permissions as $permission)
+                                <div wire:click="setPermission({{ $permission->id }})" class="p-2 {{ in_array($permission->id, $form['permissions']) ? 'bg-blue-400 hover:bg-blue-300' : 'bg-white hover:bg-gray-200' }} flex items-center border-b last:border-0 border-gray-400 cursor-pointer transition ease-in-out">
+                                    @if (in_array($permission->id, $form['permissions']))
+                                        <div class="flex-none mr-2">
+                                            <i class="fas fa-check-square text-white"></i>
+                                        </div>
+                                        <div class="flex-grow">
+                                            <span>{{ $permission->description }}</span>
+                                        </div>
+                                    @else
+                                        <div class="flex-none mr-2">
+                                            <i class="far fa-square"></i>
+                                        </div>
+                                        <div class="flex-grow truncate">
+                                            <span>{{ $permission->description }}</span>
+                                        </div>
+                                    @endif
+                                </div>
+                            @empty
+                                <div class="text-gray-300 text-sm text-center">{{ __('There is no permission.') }}</div>
+                            @endforelse
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endif
         @endif
     </x-modal.content>
 
