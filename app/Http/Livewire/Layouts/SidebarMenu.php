@@ -34,13 +34,18 @@ class SidebarMenu extends Component
         $menu_permission = array_map(fn($permission) => $permission['id'], $menu['permissions']);
 
         return !(count($menu_permission) > 0) ?
-            TRUE : (
-                count(
-                    array_filter($auth_permission, function($item) use($menu_permission) {
-                        return in_array($item, $menu_permission);
-                    })
-                ) > 0
-            );
+            TRUE : function(){
+                if(auth()->user()->role->name == 'developer'){
+                    return TRUE;
+                }
+
+                return 
+                    count(
+                        array_filter($auth_permission, function($item) use($menu_permission) {
+                            return in_array($item, $menu_permission);
+                        })
+                    ) > 0;
+            };
     }
 
     public function render()
