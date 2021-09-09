@@ -28,7 +28,7 @@
             </div>
 
             <div x-show="sidebar" style="display: none;">
-                <div class="fixed h-full w-full md:w-64 pt-12 top-0 left-0 bottom-0">
+                <div class="fixed h-full w-full md:w-64 pt-12 top-0 left-0 bottom-0 z-10">
                     <div class="h-full w-full p-1 bg-gray-100 md:border-r-2 border-blue-500 flex flex-col overflow-y-hidden">
                         <div class="bg-gradient-to-b from-gray-100 to-gray-300 border border-gray-300 shadow">
                             <div class="p-2 text-sm">
