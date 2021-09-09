@@ -37,7 +37,7 @@ class SidebarMenu extends Component
             if(auth()->user()->role->name == 'developer'){
                 return TRUE;
             }
-            
+
             return count(array_filter($auth_permission, function($item) use($menu_permission){ return in_array($item, $menu_permission); })) > 0;
         } else {
             return TRUE;
@@ -47,8 +47,6 @@ class SidebarMenu extends Component
     public function render()
     {
         $menus = $this->getActiveMenu();
-
-        dd($menus);
 
         return view('livewire.layouts.sidebar-menu', compact('menus'));
     }
