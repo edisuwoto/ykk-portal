@@ -7,6 +7,9 @@ return [
     'create_new'        => 'Create New',
     'create'            => 'Create',
     'update'            => 'Update',
+    'save'              => 'Save',
+    'cancel'            => 'Cancel',
     'close'             => 'Close',
     'reset_password'    => 'Reset Password',
+    'show'              => 'Show',
 ];
