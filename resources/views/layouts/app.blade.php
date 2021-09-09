@@ -66,7 +66,7 @@
 
                 <!-- Page Content -->
                 <main class="container mx-auto">
-                    {{ $slot }}
+                    @livewire('layouts.page-content', ['content' => base64_encode($slot)])
                 </main>
             </div>
 
