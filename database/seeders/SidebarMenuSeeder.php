@@ -130,8 +130,8 @@ class SidebarMenuSeeder extends Seeder
                     [
                         'title'         => 'Printers and Labels',
                         'parent_id'     => 11,
-                        'link'          => '#',
-                        'link_type'     => 'url',
+                        'link'          => 'settings.printers-labels',
+                        'link_type'     => 'route',
                         'icon'          => 'fas fa-print',
                         'sort'          => 2,
                         'active'        => true,
@@ -139,8 +139,8 @@ class SidebarMenuSeeder extends Seeder
                     [
                         'title'         => 'PLC Settings',
                         'parent_id'     => 11,
-                        'link'          => '#',
-                        'link_type'     => 'url',
+                        'link'          => 'settings.plc-settings',
+                        'link_type'     => 'route',
                         'icon'          => 'fas fa-server',
                         'sort'          => 3,
                         'active'        => true,
@@ -152,7 +152,7 @@ class SidebarMenuSeeder extends Seeder
                 $menus = Menu::get();
                 $permissions = Permission::get();
 
-                $user_management = $menus->find(12);
+                $user_management = $menus->where('link', 'settings.user-management')->first();
 
                 if ($user_management) {
                     $user_management
@@ -160,6 +160,21 @@ class SidebarMenuSeeder extends Seeder
                         ->sync($permissions
                             ->filter(
                                 fn($permission) => in_array($permission->name, ['user_management-access'])
+                            )
+                            ->map(
+                                fn($permission) => $permission->id
+                            )
+                        );
+                }
+
+                $printers_labels = $menus->where('link', 'settings.printers-labels')->first();
+
+                if ($printers_labels) {
+                    $printers_labels
+                        ->permissions()
+                        ->sync($permissions
+                            ->filter(
+                                fn($permission) => in_array($permission->name, ['printers_and_labels-access'])
                             )
                             ->map(
                                 fn($permission) => $permission->id

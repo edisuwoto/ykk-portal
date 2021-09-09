@@ -49,6 +49,10 @@ class PermissionSeeder extends Seeder
                 'name'              => 'user_password-reset',
                 'description'       => 'Reset user password',
             ],
+            [
+                'name'              => 'printers_and_labels-access',
+                'description'       => 'Access printers and labels',
+            ],
         ];
 
         try {
@@ -75,6 +79,8 @@ class PermissionSeeder extends Seeder
                             'user-create',
                             'user-edit',
                             'user-delete',
+                            'user_password-reset',
+                            'printers_and_labels-access',
                         ])
                     )->map(
                         fn($permission) => $permission->id
