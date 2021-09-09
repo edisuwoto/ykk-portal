@@ -109,6 +109,6 @@ class User extends Authenticatable
          */
         public function hasPermission($permission)
         {
-            return $this->permissions->where(['name' => $permission])->first() || $this->role->name === 'developer' ? TRUE : FALSE;
+            return $this->permissions->where('name', $permission)->first() || $this->role->name === 'developer' ? TRUE : FALSE;
         }
 }

@@ -46,7 +46,7 @@ class CreateForm extends Component
     public function load()
     {
         try {
-            $this->roles = Role::orderBy('name', 'asc')->get();
+            $this->roles = (Role::orderBy('name', 'asc')->get())->filter(fn($role) => $role->name == 'developer' ? (auth()->user()->role->name == 'developer') : TRUE );
             $this->permissions = Permission::orderBy('description', 'asc')->get();
 
             $this->readyToLoad = TRUE;

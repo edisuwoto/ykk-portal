@@ -68,6 +68,9 @@ class IndexTable extends DataTableComponent
     public function query(): Builder
     {
         return User::query()
+            ->when(
+                auth()->user()->role->name,
+                fn($query, $role) => $role == 'developer' ? $query : $query->whereNotIn('role_id', (Role::where('name', 'developer')->get())->pluck('id')))
             ->when($this->getFilter('roles'), fn ($query, $roles) => $query->where(['role_id' => $roles]));
     }
 
