@@ -18,6 +18,11 @@ class PageContent extends Component
     {
         $this->readyToLoad = TRUE;
     }
+    
+    public function receiveFlashMessage($type, $messages)
+    {
+        session()->flash($type, $messages);
+    }
 
     public function clearFlashMessage()
     {

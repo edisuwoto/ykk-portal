@@ -39,7 +39,7 @@ class CreateForm extends Component
     public function mount()
     {
         if (!auth()->user()->hasPermission('user-create')) {
-            session()->flash('failed', __('You are not authorize'));
+            $this->dispatchBrowserEvent('failed-message', __('You are not authorize'));
             $this->close();
         }
     }
@@ -53,7 +53,7 @@ class CreateForm extends Component
             $this->readyToLoad = TRUE;
         } catch (\Exception $e) {
             $this->close();
-            session()->flash('failed', $e->getMessage());
+            $this->dispatchBrowserEvent('failed-message', $e->getMessage());
         }
     }
 
@@ -86,7 +86,7 @@ class CreateForm extends Component
             });
         } catch (\Exception $e) {
             $this->close();
-            session()->flash('failed', $e->getMessage());
+            $this->dispatchBrowserEvent('failed-message', $e->getMessage());
         }
     }
 

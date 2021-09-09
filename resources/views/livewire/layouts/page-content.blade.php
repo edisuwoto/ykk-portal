@@ -1,4 +1,9 @@
-<div x-data="{ load : @entangle('readyToLoad').defer, flash : @entangle('showFlashMessage').defer }" wire:init="loadPage()">
+<div x-data="{ load : @entangle('readyToLoad').defer, flash : @entangle('showFlashMessage').defer }"
+    wire:init="loadPage()"
+    x-on:success-message.window="$wire.receiveFlashMessage('success', $event.detail)"
+    x-on:failed-message.window="$wire.receiveFlashMessage('failed', $event.detail)"
+    x-on:warning-message.window="$wire.receiveFlashMessage('warning', $event.detail)"
+    x-on:info-message.window="$wire.receiveFlashMessage('info', $event.detail)">
     <div x-show="flash">
         @if ($showFlashMessage)
             <div x-init="() => { setTimeout(function(){ $wire.clearFlashMessage(); }, 15000); }" class="fixed left-0 right-0 bottom-0 md:top-14 z-40">

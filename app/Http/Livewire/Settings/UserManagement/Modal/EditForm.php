@@ -66,11 +66,11 @@ class EditForm extends Component
                 $this->readyToLoad = TRUE;
             } catch (\Exception $e) {
                 $this->close();
-                session()->flash('failed', $e->getMessage());
+                $this->dispatchBrowserEvent('failed-message', $e->getMessage());
             }
         } catch (Illuminate\Contracts\Encryption\DecryptException $e) {
             $this->close();
-            session()->flash('failed', $e->getMessage());
+            $this->dispatchBrowserEvent('failed-message', $e->getMessage());
         }
     }
 
@@ -128,7 +128,7 @@ class EditForm extends Component
             });
         } catch (\Exception $e) {
             $this->close();
-            session()->flash('failed', $e->getMessage());
+            $this->dispatchBrowserEvent('failed-message', $e->getMessage());
         }
     }
 

@@ -52,8 +52,7 @@ class PlcSettings extends Component
 
     public function submit()
     {
-        session()->flash('success', __('messages.saved'));
-        return redirect()->route('settings.plc-settings');
+        $this->dispatchBrowserEvent('success-message', __('messages.saved'));
     }
 
     public function render()
