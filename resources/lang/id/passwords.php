@@ -18,6 +18,6 @@ return [
     'throttled' => 'Mohon tunggu sebelum mencoba kembali.',
     'token' => 'Token penyetelan ulang kata sandi ini tidak valid.',
     'user' => "Kami tidak dapat menemukan akun pengguna dengan alamat email tersebut.",
-    'current' => "Password Anda saat ini yaitu ':password'",
+    'current' => "Kata Sandi Anda saat ini yaitu ':password'",
 
 ];

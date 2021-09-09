@@ -70,7 +70,7 @@
                 @if (auth()->user()->hasPermission('user_password-reset'))
                     <div class="col-span-2">
                         <x-button wire:click="resetPassword()" wire:loading.attr="disabled" wire:target="resetPassword()" class="w-full">
-                            <i wire:loading wire:target="resetPassword()" class="fas fa-spin fa-circle-notch"></i> {{ __('Reset Password') }}
+                            <i wire:loading wire:target="resetPassword()" class="fas fa-spin fa-circle-notch"></i> {{ __('button.reset_password') }}
                         </x-button>
                     </div>
                 @endif

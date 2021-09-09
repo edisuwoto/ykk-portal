@@ -8,4 +8,5 @@ return [
     'create'            => 'Create',
     'update'            => 'Update',
     'close'             => 'Close',
+    'reset_password'    => 'Reset Password',
 ];

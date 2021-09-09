@@ -8,4 +8,5 @@ return [
     'create'            => 'Buat',
     'update'            => 'Perbaharui',
     'close'             => 'Tutup',
+    'reset_password'    => 'Setel Ulang Kata Sandi',
 ];
