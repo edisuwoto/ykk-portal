@@ -19,7 +19,7 @@ class Menu extends Model
         'active',
     ];
 
-    protected $with = ['childs'];
+    protected $with = ['childs', 'permissions'];
 
     /**
      * Get all of the childs for the Menu
@@ -40,4 +40,19 @@ class Menu extends Model
     {
         return $this->belongsToMany(Permission::class);
     }
+
+    // Methods
+        /**
+         * User has permission
+         *
+         * @return bool
+         */
+        public function hasPermission($permission)
+        {
+            if ($this->permissions->where(['name' => $permission])->first()) {
+                return auth()->user()->hasPermission($permission) || auth()->user()->role->name === 'developer' ? TRUE : FALSE;
+            } else {
+                return TRUE;
+            }
+        }
 }

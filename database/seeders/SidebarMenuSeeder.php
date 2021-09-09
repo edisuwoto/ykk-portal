@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 
 // Models
-use App\Models\Menu;
+use App\Models\{ Menu, Permission };
 
 class SidebarMenuSeeder extends Seeder
 {
@@ -147,7 +147,25 @@ class SidebarMenuSeeder extends Seeder
                     ],
                 ];
 
-                return Menu::upsert($menus, ['title'], ['parent_id', 'link', 'link_type', 'icon', 'sort', 'active']);
+                Menu::upsert($menus, ['title'], ['parent_id', 'link', 'link_type', 'icon', 'sort', 'active']);
+
+                $menus = Menu::get();
+                $permissions = Permission::get();
+
+                $user_management = $menus->find(12);
+
+                if ($user_management) {
+                    $user_management
+                        ->permissions()
+                        ->sync($permissions
+                            ->filter(
+                                fn($permission) => in_array($permission->name, ['user_management-access'])
+                            )
+                            ->map(
+                                fn($permission) => $permission->id
+                            )
+                        );
+                }
             });
         } catch (\Exception $e) {
             dd($e);
