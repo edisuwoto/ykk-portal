@@ -56,9 +56,18 @@
                                             <x-input wire:model.defer="form.da1" type="number" min="0" class="w-full text-sm text-right"/>
                                         </div>
                                     </div>
-                                    <div>
-                                        <x-label :value="__('PLC Status')"/>
-                                        <div class="flex items-center justify-start space-x-2">
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <x-label :value="__('Test Connection')"/>
+                                            <x-button wire:click="sync" wire:loading.attr="disabled" class="text-xs">
+                                                <i
+                                                    wire:target="sync"
+                                                    wire:loading.class="fa-spin"
+                                                    class="fas fa-sync"></i> {{ __('button.test') }}
+                                            </x-button>
+                                        </div>
+                                        <div>
+                                            <x-label :value="__('PLC Status')"/>
                                             @switch($status)
                                                 @case('connected')
                                                     <x-badge color="text-green-100 bg-green-600" :value="__('Connected')" />
@@ -69,13 +78,6 @@
                                                 @default
                                                     <x-badge :value="__('Unknown')" />
                                             @endswitch
-                                            <button wire:click="sync" wire:loading.attr="disabled" type="button" class="focus:outline-none border border-transparent rounded-full">
-                                                <i
-                                                    wire:target="sync"
-                                                    wire:loading.class="fa-spin text-gray-300"
-                                                    wire:loading.class.remove="text-gray-500"
-                                                    class="fas fa-sync text-gray-500 text-sm"></i>
-                                            </button>
                                         </div>
                                     </div>
                                 </div>

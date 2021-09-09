@@ -12,4 +12,5 @@ return [
     'close'             => 'Close',
     'reset_password'    => 'Reset Password',
     'show'              => 'Show',
+    'test'              => 'Test',
 ];

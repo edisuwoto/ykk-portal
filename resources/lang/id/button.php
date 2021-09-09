@@ -12,4 +12,5 @@ return [
     'close'             => 'Tutup',
     'reset_password'    => 'Setel Ulang Kata Sandi',
     'show'              => 'Tampilkan',
+    'test'              => 'Tes',
 ];

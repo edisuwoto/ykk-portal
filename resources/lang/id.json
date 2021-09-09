@@ -27,5 +27,6 @@
     "Per Page"              : "Halaman",
     "Connected"             : "Terhubung",
     "Disconnected"          : "Terputus",
-    "Unknown"               : "Tidak dikenali"
+    "Unknown"               : "Tidak dikenali",
+    "Test Connection"       : "Tes Koneksi"
 }
