@@ -50,7 +50,7 @@
                 </div>
                 <div>
                     <x-label value="{{__('Email')}}"/>
-                    <x-input type="text" wire:model.defer="form.email" disabled class="text-xs w-full"/>
+                    <x-input type="email" wire:model.defer="form.email" disabled class="text-xs w-full"/>
                     @foreach ($errors->get('form.email') as $message)
                         <div class="text-xs text-red-600">{{ $message }}</div>
                     @endforeach
