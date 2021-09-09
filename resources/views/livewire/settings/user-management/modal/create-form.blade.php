@@ -36,8 +36,15 @@
                 </div>
                 <div>
                     <x-label value="{{__('Email')}}"/>
-                    <x-input type="text" wire:model.defer="form.email" class="text-xs w-full"/>
+                    <x-input type="email" wire:model.defer="form.email" class="text-xs w-full"/>
                     @foreach ($errors->get('form.email') as $message)
+                        <div class="text-xs text-red-600">{{ $message }}</div>
+                    @endforeach
+                </div>
+                <div>
+                    <x-label value="{{__('Password')}}"/>
+                    <x-input type="password" wire:model.defer="form.password" class="text-xs w-full"/>
+                    @foreach ($errors->get('form.password') as $message)
                         <div class="text-xs text-red-600">{{ $message }}</div>
                     @endforeach
                 </div>

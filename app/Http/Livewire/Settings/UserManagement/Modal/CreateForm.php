@@ -23,6 +23,7 @@ class CreateForm extends Component
         'email'                 => '',
         'profile_photo_url'     => '',
         'role_id'               => '',
+        'password'              => '',
         'permissions'           => [],
     ];
 
@@ -53,7 +54,6 @@ class CreateForm extends Component
         } catch (\Exception $e) {
             $this->close();
             session()->flash('failed', $e->getMessage());
-            dd($e);
         }
     }
 
@@ -87,7 +87,6 @@ class CreateForm extends Component
         } catch (\Exception $e) {
             $this->close();
             session()->flash('failed', $e->getMessage());
-            dd($e);
         }
     }
 
@@ -96,12 +95,12 @@ class CreateForm extends Component
         $this->resetErrorBag();
         $errors = $this->getErrorBag();
 
-        $validation_fields = ['name', 'email', 'role_id'];
+        $validation_fields = ['name', 'email', 'role_id', 'password'];
 
         // Required
         foreach ($validation_fields as $field) {
             if ($form[$field] == '') {
-                $errors->add('form.'.$field, __("The ".(str_replace('_id', '', $field))." field is required."));
+                $errors->add('form.'.$field, __('validation.required', ['attribute' => (str_replace('_id', '', $field))]));
             }
         }
 
@@ -113,10 +112,14 @@ class CreateForm extends Component
                 $data = User::where($field, $form[$field])->first();
                 if ($data) {
                     if ($data->id != $form['id']) {
-                        $errors->add('form.'.$field, __("The ".(str_replace('_id', '', $field))." is already exists."));
+                        $errors->add('form.'.$field, __('validation.unique', ['attribute' => (str_replace('_id', '', $field))]));
                     }
                 }
             }
+        }
+
+        if (strlen($form['password']) < 6) {
+            $errors->add('form.password', __('validation.size.string', ['size' => 6, 'attribute' => 'password']));
         }
 
         return $errors;
