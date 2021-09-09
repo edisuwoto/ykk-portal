@@ -67,12 +67,10 @@ class EditForm extends Component
             } catch (\Exception $e) {
                 $this->close();
                 session()->flash('failed', $e->getMessage());
-                dd($e);
             }
         } catch (Illuminate\Contracts\Encryption\DecryptException $e) {
             $this->close();
             session()->flash('failed', $e->getMessage());
-            dd($e);
         }
     }
 
@@ -131,7 +129,6 @@ class EditForm extends Component
         } catch (\Exception $e) {
             $this->close();
             session()->flash('failed', $e->getMessage());
-            dd($e);
         }
     }
 
