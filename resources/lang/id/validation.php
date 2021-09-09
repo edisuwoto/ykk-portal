@@ -110,7 +110,7 @@ return [
     'size' => [
         'numeric' => ':attribute harus berupa :size.',
         'file' => ':attribute harus berupa :size kilobyte.',
-        'string' => ':attribute harus berupa :size character.',
+        'string' => ':attribute harus berupa :size karakter.',
         'array' => ':attribute harus berisi :size item.',
     ],
     'starts_with' => ':attribute harus dimulai dengan salah satu dari berikut ini: :values.',
