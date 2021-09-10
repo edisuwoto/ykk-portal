@@ -14,7 +14,7 @@
         @else
             href="{{ $link }}"
         @endif
-        class="border border-gray-300 bg-gradient-to-b from-gray-100 to-gray-300 hover:from-gray-50 hover:to-gray-200 flex items-center px-3 h-10 z-10 shadow">
+        class="border border-gray-300 bg-gradient-to-b from-gray-100 to-gray-300 hover:from-gray-50 hover:to-gray-200 flex items-center px-3 h-10 shadow cursor-pointer">
             <div class="w-full flex items-center justify-between">
                 <div class="flex items-center">
                     <div class="mr-2 text-center">
