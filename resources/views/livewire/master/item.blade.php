@@ -16,7 +16,7 @@
     </div>
     <div class="col-span-12">
         <div>
-            @livewire('master.items-master.index-table')
+            @livewire('master.item.index-table')
         </div>
     </div>
 </div>

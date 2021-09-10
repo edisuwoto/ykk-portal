@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Master\ItemsMaster;
+namespace App\Http\Livewire\Master\Item;
 
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
