@@ -68,8 +68,8 @@ class SidebarMenuSeeder extends Seeder
                     ],
                     [
                         'parent_id'     => $master->id,
-                        'link'          => '#',
-                        'link_type'     => 'url',
+                        'link'          => 'master.customers.index',
+                        'link_type'     => 'route',
                         'icon'          => 'fas fa-user-tie',
                         'sort'          => 2,
                         'active'        => true,

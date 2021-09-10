@@ -49,6 +49,7 @@ Route::middleware(['auth'])->group(function(){
 
     Route::name('master.')->prefix('master')->group(function(){
         Route::resource('items', Master\ItemController::class)->only(['index', 'create', 'show']);
+        Route::resource('customers', Master\CustomerController::class)->only(['index', 'create', 'show']);
     });
 
     Route::name('settings')->prefix('settings')->group(function(){
