@@ -106,8 +106,11 @@
                                         </div>
                                         <div>
                                             <x-label :value="__('item.unit')" />
-                                            <x-select wire:model.defer="form.quantity_unit" type="text" class="w-full text-xs">
+                                            <x-select wire:model.defer="form.quantity_unit_id" type="text" class="w-full text-xs">
                                                 <option value="">--{{ __('item.unit_select') }}--</option>
+                                                @foreach ($this->unit as $unit)
+                                                    <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                                                @endforeach
                                             </x-select>
                                         </div>
                                     </div>
@@ -118,8 +121,11 @@
                                         </div>
                                         <div>
                                             <x-label :value="__('item.unit')" />
-                                            <x-select wire:model.defer="form.weight_unit" type="text" class="w-full text-xs">
+                                            <x-select wire:model.defer="form.weight_unit_id" type="text" class="w-full text-xs">
                                                 <option value="">--{{ __('item.unit_select') }}--</option>
+                                                @foreach ($this->unit as $unit)
+                                                    <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                                                @endforeach
                                             </x-select>
                                         </div>
                                     </div>

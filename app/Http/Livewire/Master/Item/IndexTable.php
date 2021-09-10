@@ -34,7 +34,7 @@ class IndexTable extends DataTableComponent
                 ->sortable(),
             Column::make(__('item.quantity'), 'quantity')
                 ->sortable(),
-            Column::make(__('item.unit'))
+            Column::make(__('item.unit'), 'quantity_unit.id')
                 ->format(fn($value, $column, $row) => ''),
             Column::make(__('item.action'))
                 ->format(fn($value, $column, $row) => ''),

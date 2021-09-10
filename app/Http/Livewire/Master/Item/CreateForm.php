@@ -5,6 +5,9 @@ namespace App\Http\Livewire\Master\Item;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
+// Models
+use App\Models\Master\{Item, Unit};
+
 class CreateForm extends Component
 {
     use WithFileUploads;
@@ -14,18 +17,25 @@ class CreateForm extends Component
     ];
 
     public $form = [
-        'code'          => '',
-        'name_1'        => '',
-        'name_2'        => '',
-        'name_3'        => '',
-        'active'        => true,
-        'color'         => '',
-        'quantity'      => 0,
-        'weight'        => 0,
-        'picture_path'  => '',
+        'code'              => '',
+        'name_1'            => '',
+        'name_2'            => '',
+        'name_3'            => '',
+        'active'            => true,
+        'color'             => '',
+        'quantity'          => 0,
+        'quantity_unit_id'  => '',
+        'weight'            => 0,
+        'weight_unit_id'    => '',
+        'picture_path'      => '',
     ];
 
     public $photo;
+
+    public function getUnitProperty()
+    {
+        return Unit::get();
+    }
 
     public function removePhoto()
     {

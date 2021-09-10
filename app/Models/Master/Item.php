@@ -17,7 +17,31 @@ class Item extends Model
         'active',
         'color',
         'quantity',
+        'quantity_unit_id',
         'weight',
+        'weight_unit_id',
         'picture_path',
     ];
+
+    protected $with = ['quantity_unit', 'weight_unit'];
+
+    /**
+     * Get the quantity unit that owns the Item
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function quantity_unit()
+    {
+        return $this->belongsTo(Unit::class, 'quantity_unit_id');
+    }
+
+    /**
+     * Get the weight unit that owns the Item
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function weight_unit(): BelongsTo
+    {
+        return $this->belongsTo(Unit::class, 'weight_unit_id');
+    }
 }
