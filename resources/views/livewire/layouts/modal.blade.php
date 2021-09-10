@@ -99,7 +99,7 @@
 
         @if ($options['footer'])
             <x-modal.footer>
-                <x-button wire:click="close">
+                <x-button x-on:click="closeModal()">
                     {{__('button.close')}}
                 </x-button>
             </x-modal.footer>
