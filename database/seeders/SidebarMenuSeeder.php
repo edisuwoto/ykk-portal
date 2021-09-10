@@ -62,7 +62,7 @@ class SidebarMenuSeeder extends Seeder
                     ]
                 );
 
-                Menu::updateOrCreate(
+                $customers = Menu::updateOrCreate(
                     [
                         'title'         => 'Customers',
                     ],
@@ -76,14 +76,14 @@ class SidebarMenuSeeder extends Seeder
                     ]
                 );
 
-                Menu::updateOrCreate(
+                $machines = Menu::updateOrCreate(
                     [
                         'title'         => 'Machines',
                     ],
                     [
                         'parent_id'     => $master->id,
-                        'link'          => '#',
-                        'link_type'     => 'url',
+                        'link'          => 'master.machines.index',
+                        'link_type'     => 'route',
                         'icon'          => 'fas fa-cogs',
                         'sort'          => 3,
                         'active'        => true,
