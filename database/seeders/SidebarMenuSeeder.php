@@ -90,14 +90,14 @@ class SidebarMenuSeeder extends Seeder
                     ]
                 );
 
-                Menu::updateOrCreate(
+                $work_center = Menu::updateOrCreate(
                     [
                         'title'         => 'Work Center',
                     ],
                     [
                         'parent_id'     => $master->id,
-                        'link'          => '#',
-                        'link_type'     => 'url',
+                        'link'          => 'master.work-center.index',
+                        'link_type'     => 'route',
                         'icon'          => 'fas fa-building',
                         'sort'          => 4,
                         'active'        => true,
