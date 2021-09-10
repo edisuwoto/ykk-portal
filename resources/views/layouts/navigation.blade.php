@@ -4,7 +4,7 @@
         <!-- Logo -->
         <div class="flex justify-start items-center">
             <div class="flex items-center">
-                <a class="hidden md:block" href="{{ route('dashboard') }}">
+                <a class="sr-only md:not-sr-only" href="{{ route('dashboard') }}">
                     <span class="inline-flex items-center font-black text-white">PT YKK ZIPPER</span>
                 </a>
                 <span class="md:ml-32 inline-flex rounded-md">
