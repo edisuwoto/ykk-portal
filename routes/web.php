@@ -52,6 +52,7 @@ Route::middleware(['auth'])->group(function(){
         Route::resource('customers', Master\CustomerController::class)->only(['index', 'create', 'show']);
         Route::resource('machines', Master\MachineController::class)->only(['index', 'create', 'show']);
         Route::resource('work-center', Master\WorkCenterController::class)->only(['index', 'create', 'show']);
+        Route::resource('unit', Master\UnitController::class)->only(['index', 'create', 'show']);
     });
 
     Route::name('settings')->prefix('settings')->group(function(){

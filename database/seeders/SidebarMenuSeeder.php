@@ -104,14 +104,14 @@ class SidebarMenuSeeder extends Seeder
                     ]
                 );
 
-                Menu::updateOrCreate(
+                $unit = Menu::updateOrCreate(
                     [
                         'title'         => 'Units',
                     ],
                     [
                         'parent_id'     => $master->id,
-                        'link'          => '#',
-                        'link_type'     => 'url',
+                        'link'          => 'master.unit.index',
+                        'link_type'     => 'route',
                         'icon'          => 'fas fa-balance-scale',
                         'sort'          => 5,
                         'active'        => true,
