@@ -28,6 +28,8 @@ class IndexTable extends DataTableComponent
                 ->sortable(),
             Column::make(__('machine.status'), 'status')
                 ->sortable(),
+            Column::make(__('machine.work_center'), 'work_center.name')
+                ->sortable(),
             Column::make(__('machine.action'))
                 ->format(fn($value, $column, $row) => ''),
         ];
