@@ -28,5 +28,6 @@
     "Connected"             : "Terhubung",
     "Disconnected"          : "Terputus",
     "Unknown"               : "Tidak dikenali",
-    "Test Connection"       : "Tes Koneksi"
+    "Test Connection"       : "Tes Koneksi",
+    "No pictures"           : "Tidak ada gambar"
 }
