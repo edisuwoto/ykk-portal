@@ -47,6 +47,10 @@ Route::middleware(['auth'])->group(function(){
         return view('dashboard');
     })->name('dashboard');
 
+    Route::name('master.')->prefix('master')->group(function(){
+        Route::resource('items', Master\ItemController::class)->only(['index', 'create', 'show']);
+    });
+
     Route::name('settings')->prefix('settings')->group(function(){
         Route::get('user-management', Livewire\Settings\UserManagement::class)->name('.user-management');
         Route::get('printers-labels', Livewire\Settings\PrinterAndLabel::class)->name('.printers-labels');

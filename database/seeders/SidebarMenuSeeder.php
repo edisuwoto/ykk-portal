@@ -19,7 +19,7 @@ class SidebarMenuSeeder extends Seeder
         try {
             return \DB::transaction(function () {
                 $permissions = Permission::get();
-                
+
                 Menu::updateOrCreate(
                     [
                         'title'         => 'Home',
@@ -34,7 +34,7 @@ class SidebarMenuSeeder extends Seeder
                     ]
                 );
 
-                Menu::updateOrCreate(
+                $master = Menu::updateOrCreate(
                     [
                         'title'         => 'Master Data',
                     ],
@@ -48,14 +48,14 @@ class SidebarMenuSeeder extends Seeder
                     ]
                 );
 
-                Menu::updateOrCreate(
+                $items = Menu::updateOrCreate(
                     [
                         'title'         => 'Items',
                     ],
                     [
-                        'parent_id'     => 2,
-                        'link'          => '#',
-                        'link_type'     => 'url',
+                        'parent_id'     => $master->id,
+                        'link'          => 'master.items.index',
+                        'link_type'     => 'route',
                         'icon'          => 'fas fa-boxes',
                         'sort'          => 1,
                         'active'        => true,
@@ -67,7 +67,7 @@ class SidebarMenuSeeder extends Seeder
                         'title'         => 'Customers',
                     ],
                     [
-                        'parent_id'     => 2,
+                        'parent_id'     => $master->id,
                         'link'          => '#',
                         'link_type'     => 'url',
                         'icon'          => 'fas fa-user-tie',
@@ -81,7 +81,7 @@ class SidebarMenuSeeder extends Seeder
                         'title'         => 'Machines',
                     ],
                     [
-                        'parent_id'     => 2,
+                        'parent_id'     => $master->id,
                         'link'          => '#',
                         'link_type'     => 'url',
                         'icon'          => 'fas fa-cogs',
@@ -95,7 +95,7 @@ class SidebarMenuSeeder extends Seeder
                         'title'         => 'Work Center',
                     ],
                     [
-                        'parent_id'     => 2,
+                        'parent_id'     => $master->id,
                         'link'          => '#',
                         'link_type'     => 'url',
                         'icon'          => 'fas fa-building',
@@ -109,7 +109,7 @@ class SidebarMenuSeeder extends Seeder
                         'title'         => 'Units',
                     ],
                     [
-                        'parent_id'     => 2,
+                        'parent_id'     => $master->id,
                         'link'          => '#',
                         'link_type'     => 'url',
                         'icon'          => 'fas fa-balance-scale',
@@ -118,7 +118,7 @@ class SidebarMenuSeeder extends Seeder
                     ]
                 );
 
-                Menu::updateOrCreate(
+                $productions = Menu::updateOrCreate(
                     [
                         'title'         => 'Productions',
                     ],
@@ -137,7 +137,7 @@ class SidebarMenuSeeder extends Seeder
                         'title'         => 'Work Order',
                     ],
                     [
-                        'parent_id'     => 8,
+                        'parent_id'     => $productions->id,
                         'link'          => '#',
                         'link_type'     => 'url',
                         'icon'          => 'fas fa-file-alt',
@@ -151,7 +151,7 @@ class SidebarMenuSeeder extends Seeder
                         'title'         => 'Reports',
                     ],
                     [
-                        'parent_id'     => 8,
+                        'parent_id'     => $productions->id,
                         'link'          => '#',
                         'link_type'     => 'url',
                         'icon'          => 'fas fa-chart-bar',
@@ -160,7 +160,7 @@ class SidebarMenuSeeder extends Seeder
                     ]
                 );
 
-                Menu::updateOrCreate(
+                $settings = Menu::updateOrCreate(
                     [
                         'title'         => 'Settings',
                     ],
@@ -179,7 +179,7 @@ class SidebarMenuSeeder extends Seeder
                         'title'         => 'User Management',
                     ],
                     [
-                        'parent_id'     => 11,
+                        'parent_id'     => $settings->id,
                         'link'          => 'settings.user-management',
                         'link_type'     => 'route',
                         'icon'          => 'fas fa-user-cog',
@@ -204,7 +204,7 @@ class SidebarMenuSeeder extends Seeder
                         'title'         => 'Printers and Labels',
                     ],
                     [
-                        'parent_id'     => 11,
+                        'parent_id'     => $settings->id,
                         'link'          => 'settings.printers-labels',
                         'link_type'     => 'route',
                         'icon'          => 'fas fa-print',
@@ -212,7 +212,7 @@ class SidebarMenuSeeder extends Seeder
                         'active'        => true,
                     ]
                 );
-                
+
                 $printers_labels
                     ->permissions()
                     ->sync($permissions
@@ -229,7 +229,7 @@ class SidebarMenuSeeder extends Seeder
                         'title'         => 'PLC Settings',
                     ],
                     [
-                        'parent_id'     => 11,
+                        'parent_id'     => $settings->id,
                         'link'          => 'settings.plc-settings',
                         'link_type'     => 'route',
                         'icon'          => 'fas fa-server',
