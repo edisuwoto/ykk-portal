@@ -22,6 +22,11 @@ Route::get('/', function () {
     return redirect()->route('dashboard');
 });
 
+Route::get('optimize', function (){
+    \Artisan::command('optimize');
+    dd('Application has been optimized!');
+});
+
 Route::name('lang')->prefix('lang')->group(function(){
     Route::get('change/{lang?}', function($lang){
         $list_in_lang_folder = scandir(base_path().'/resources/lang/');
