@@ -23,8 +23,9 @@ Route::get('/', function () {
 });
 
 Route::get('optimize', function (){
-    \Artisan::command('optimize');
-    dd('Application has been optimized!');
+    \Artisan::command('optimize', function(){});
+
+    echo 'Application has been optimized!';
 });
 
 Route::name('lang')->prefix('lang')->group(function(){
